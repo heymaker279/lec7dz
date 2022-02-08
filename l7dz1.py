@@ -20,6 +20,20 @@ class Student:
             return 'Ошибка'
     def __str__(self):
         return f'\n  Студент\nИмя: {self.name} \nФамилия:  {self.surname} \nСредняя оценка за домашнее задаие: {round(sum(self.all_grades) / len(self.all_grades), 1)} \nКурсы в процессе изучения: {", ".join(self.courses_in_progress)} \nЗавершенные курсы: {", ".join(self.finished_courses)}'    
+    
+    def __eq__(self, other):
+        if not isinstance(other, Student):
+            print('Сравниваем оценки только студентов!')
+        else:
+            return round(sum(self.all_grades) / len(self.all_grades), 1) == round(sum(other.all_grades) / len(other.all_grades), 1)
+
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            print('Сравниваем оценки только студентов!')
+        else:
+            return round(sum(self.all_grades) / len(self.all_grades), 1) < round(sum(other.all_grades) / len(other.all_grades), 1)
+
+
     def comparison_grades(self, other):
         '''Сравнение оценок'''
         if round(sum(self.all_grades) / len(self.all_grades), 1) > round(sum(other.all_grades) / len(other.all_grades), 1):
@@ -38,6 +52,19 @@ class Lecturer(Mentor):
         self.all_grades = []
     def __str__(self):
         return f'\n  Лектор\nИмя: {self.name} \nФамилия:  {self.surname} \nСредняя оценка за лекции:  {round(sum(self.all_grades) / len(self.all_grades), 1)}'
+    def __eq__(self, other):
+        if not isinstance(other, Lecturer):
+            print('Сравниваем оценки только лекторов!')
+        else:
+            return round(sum(self.all_grades) / len(self.all_grades), 1) == round(sum(other.all_grades) / len(other.all_grades), 1)
+
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print('Сравниваем оценки только лекторов!')
+        else:
+            return round(sum(self.all_grades) / len(self.all_grades), 1) < round(sum(other.all_grades) / len(other.all_grades), 1) 
+    
+    
     def comparison_grades(self, other):
         '''Сравнение оценок'''
         if round(sum(self.all_grades) / len(self.all_grades), 1) > round(sum(other.all_grades) / len(other.all_grades), 1):
@@ -107,6 +134,9 @@ print(olga_student)
 print(dmitriy_student)
 dmitriy_student.comparison_grades(olga_student)
 andrey_lecturer.comparison_grades(svetlana_lecturer)
+print(olga_student < dmitriy_student)
+print(svetlana_lecturer < andrey_lecturer)
+
 
 courses_list = ['Python', 'Git']
 students_list = [olga_student, dmitriy_student]
